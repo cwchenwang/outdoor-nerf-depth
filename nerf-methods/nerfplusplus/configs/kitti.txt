@@ -1,0 +1,45 @@
+### INPUT
+datadir = /ssd1/wangchen/data/nerfpp_preprocessed
+scene = kittiSeq02_llffdtu_2011_10_03_drive_0034_sync_170scans_densegt
+depth_sup_type = gt
+# expname = kittiSeq02_170scans_depth1_2
+expname = debug_only
+trainskip = 2
+basedir = ./logs
+config = None
+ckpt_path = None
+no_reload = False
+testskip = 1
+
+### DEPTH
+use_depth = False
+lambda_depth = 1
+depth_loss_type = mse
+world_size = -1
+
+### TRAINING
+N_iters = 500001
+N_rand = 1024
+lrate = 0.0005
+lrate_decay_factor = 0.1
+lrate_decay_steps = 50000000
+
+### CASCADE
+cascade_level = 2
+cascade_samples = 64,128
+
+### TESTING
+chunk_size = 8192
+
+### RENDERING
+det = False
+max_freq_log2 = 10
+max_freq_log2_viewdirs = 4
+netdepth = 8
+netwidth = 256
+use_viewdirs = True
+
+### CONSOLE AND TENSORBOARD
+i_img = 2000
+i_print = 100
+i_weights = 10000
