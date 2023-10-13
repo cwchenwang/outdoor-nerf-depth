@@ -1,5 +1,14 @@
-# outdoor-nerf-depth
+# Digging into Depth Priors for Outdoor Neural Radiance Fields
+This is the official implementation of our ACM MM 2023 paper Digging into Depth Priors for Outdoor Neural Radiance Fields. Pull requests and issues are welcome.
+
+### [Project Page](https://cwchenwang.github.io/outdoor-nerf-depth/) | [Paper](https://arxiv.org/abs/2308.04413)
+
+Abstract: *Neural Radiance Fields (NeRF) have demonstrated impressive performance in vision and graphics tasks, such as novel view synthesis and immersive reality. However, the shape-radiance ambiguity of radiance fields remains a challenge, especially in the sparse viewpoints setting. Recent work resorts to integrating depth priors into outdoor NeRF training to alleviate the issue. However, the criteria for selecting depth priors and the relative merits of different priors have not been thoroughly investigated. Moreover, the relative merits of selecting different approaches to use the depth priors is also an unexplored problem. In this paper, we provide a comprehensive study and evaluation of employing depth priors to outdoor neural radiance fields, covering common depth sensing technologies and most application ways. Specifically, we conduct extensive experiments with two representative NeRF methods equipped with four commonly-used depth priors and different depth usages on two widely used outdoor datasets. Our experimental results reveal several interesting findings that can potentially benefit practitioners and researchers in training their NeRF models with depth priors.*
+
 [Note] We have updated our code, but due to data migration issues, data are not available currently.
+
+## Requirements
+Follow the README for each method to setup the environment.
 
 ## Depth Methods
 
