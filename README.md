@@ -43,11 +43,23 @@ For all the training scripts, you can specify the following configs:
 - `depth_sup_type`: type of depth maps, available options `gt` (lidar data), `stereo_crop` (stereo depth estimation), `mono_crop` (monocular depth estimation), `mff_crop` (depth completion), `rgbonly` (don't use depth)
 - `lambda_depth`: the weight of depth loss
 
+
+### Instant-ngp | [ngp_pl](https://github.com/kwea123/ngp_pl)
+Train on Kitti data:
+```
+bash auto_batch_run_kittiseq.sh
+```
+
+Train on Argoverse data:
+```
+bash auto_batch_run_argoseq.sh
+```
+
 ## Dataset
 
 We finally select five sequences from Seq 00, 02, 05, 06 in KITTI (125, 133, 175, 295, 320 frames) and three sequences from Argoverse (73, 72, 73 frames).
 
-Download our selected and reorganized KITTI (1.68G) and Argoverse (800M) data from [here](https://drive.google.com/drive/folders/1pTlWLGsLxCjw8DlFaL71yyWFBe4W7X5W?usp=drive_link)
+Download our selected and reorganized KITTI (1.68G) and Argoverse (890M) data from [here](https://drive.google.com/drive/folders/1pTlWLGsLxCjw8DlFaL71yyWFBe4W7X5W?usp=drive_link)
 
 <details>
   <summary>[Expected directory structure of KITTI & Argoverse (click to expand)]</summary>
