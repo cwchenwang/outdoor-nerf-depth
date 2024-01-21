@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Digging into Depth Priors for Outdoor Neural Radiance Fields</title>
+
+    <meta name="description" content="Digging into Depth Priors for Outdoor Neural Radiance Fields">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!--     <link rel="apple-touch-icon" href="apple-touch-icon.png"> -->
+    <!--   <link rel="icon" type="image/png" href="img/seal_icon.png"> -->
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap-theme.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+     -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+
+    <script src="js/app.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6YG67CMXFS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-6YG67CMXFS');
+    </script>
+
+</head>
+
+<body>
+    <div class="container" id="main">
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                Digging into Depth Priors for Outdoor Neural Radiance Fields<br>
+                <small>
+                    ACM Multimedia 2023
+                </small>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a href="https://cwchenwang.github.io/">
+                            Chen Wang<sup>1,2</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://maxchanger.github.io/">
+                            Jaidai Sun<sup>2,4</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://scholar.google.com/citations?user=Mozc1JEAAAAJ">
+                            Lina Liu<sup>3,2</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://chenming-wu.github.io/">
+                            Chenming Wu<sup>2</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://scholar.google.com/citations?user=pfzhh0IAAAAJ">
+                            Zhelun Shen<sup>2</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://wudayan92.github.io/">
+                            Dayan Wu<sup>5</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://npu-cvr.cn/">
+                            Yuchao Dai<sup>4</sup>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://www.cs.unc.edu/~zlj/">
+                            Liangjun Zhang<sup>2</sup>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="list-inline">
+                    <li>
+                        <sup>1</sup>Tsinghua University
+                    </li>
+                    <li>
+                        <sup>2</sup>Baidu Research
+                    </li>
+                    <li>
+                        <sup>3</sup>Zhejiang University
+                    </li>
+                    <br />
+                    <li>
+                        <sup>4</sup>Northwestern Polytechnical University
+                    </li>
+                    <li>
+                        <sup>5</sup>Chinese Academy of Sciences
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 text-center">
+                <ul class="nav nav-pills nav-justified">
+                    <li>
+                        <a href="data/paper.pdf">
+                            <image src="img/paper_thumbnail.png" height="60px">
+                                <h4><strong>Paper</strong></h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="data/supp.pdf">
+                            <image src="img/supp_thumbnail.png" height="60px">
+                                <h4><strong>Supp</strong></h4>
+                        </a>
+                    </li>
+                    <!-- <li>
+                            <a href="https://youtu.be/c3Yx2nGvi8o">
+                            <image src="img/youtube_icon.png" height="60px"><br>
+                                <h4><strong>Video</strong></h4>
+                            </a>
+                        </li> -->
+                    <li>
+                        <a href="https://github.com/cwchenwang/outdoor-nerf-depth">
+                            <image src="img/github.png" height="60px">
+                                <h4><strong>Code</strong></h4>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Abstract
+                </h3>
+                <p class="text-justify">
+                    Neural Radiance Fields (NeRF) have demonstrated impressive performance in vision and graphics tasks,
+                    such as novel view synthesis and immersive reality. However, the shape-radiance ambiguity of
+                    radiance fields remains a challenge, especially in the sparse viewpoints setting. Recent work
+                    resorts to integrating depth priors into outdoor NeRF training to alleviate the issue. However, the
+                    criteria for selecting depth priors and the relative merits of different priors have not been
+                    thoroughly investigated. Moreover, the relative merits of selecting different approaches to use the
+                    depth priors is also an unexplored problem. In this paper, we provide a comprehensive study and
+                    evaluation of employing depth priors to outdoor neural radiance fields, covering common depth
+                    sensing technologies and most application ways. Specifically, we conduct extensive experiments with
+                    two representative NeRF methods equipped with four commonly-used depth priors and different depth
+                    usages on two widely used outdoor datasets. Our experimental results reveal several interesting
+                    findings that can potentially benefit practitioners and researchers in training their NeRF models
+                    with depth priors.
+                </p>
+                <image src="img/teaser.png" class="img-responsive" alt="overview">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Experiment Setup
+                </h3>
+                <h4>
+                    Depth Priors
+                </h4>
+                <image src="img/depth-priors.png" style="width: 60%; margin-left: auto; margin-right: auto;"
+                    class="img-responsive" alt="priors"></image>
+                <h4>
+                    Depth Supervision Type
+                </h4>
+                <p>Direct: MSE, L1; Indirect: KL, URF</p>
+                <image src="img/loss.png" style="width: 60%; margin-left: auto; margin-right: auto;"
+                    class="img-responsive" alt="loss"></image>
+                <h4>
+                    Datasets
+                </h4>
+                <p>Kitti (5 sequence) and Argoverse (3 sequence) </p>
+                <h4>
+                    NeRF Methods
+                </h4>
+                <p>NeRF++, MipNeRF-360, Instant-NGP</p>
+                <h4>
+                    Depth Methods
+                </h4>
+                <p>MFFNet (completion), BTS (monocular), CFNet and PCWNet (stereo)</p>
+                <h4>
+                    Procedure
+                </h4>
+                <p class="text-justify">
+                    We apply different methods for novel view synthesis on each sequence with the listed depth priors in
+                    two settings: sparse input viewpoints and dense input viewpoints.
+                    We evaluate both novel view synthesis quality and depth estimation quality with corresponding
+                    metrics. We found depth priors are essential for sparse viewpoints.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Experiment Results
+                </h3>
+                <h4>Comparison on a sequence with only RGB inputs (top) and mono depth (bottom)</h4>
+                <video id="v0" width="100%" autoplay loop muted controls>
+                    <source src="img/comparison.mp4" type="video/mp4" />
+                </video>
+                <h4>Comparison of different depth priors</h4>
+                <image src="img/kitti.png" class="img-responsive" alt="kitti"></image>
+                <image src="img/argo.png" class="img-responsive" alt="argo"></image>
+                <br>
+                <h4>Point cloud Visualization</h4>
+                <image src="img/pc.png" class="img-responsive" alt="point cloud"></image>
+                <br>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Findings
+                </h3>
+                <ul style="font-size: 12pt;">
+                    1: Monocular depth is great for sparse view and comes at no cost, it can achieve comparable quality
+                    with ground truth LiDAR depth.
+                </ul>
+                <ul style="font-size: 12pt;">
+                    2. Depth supervision is an option for dense view, which increases the geometry quality of NeRFs.
+                </ul>
+                <ul style="font-size: 12pt;">
+                    3. The denser the depth, the better quality it will bring.
+                </ul>
+                <ul style="font-size: 12pt;">
+                    4. Simple loss function and depth filtering are enough.
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Citation
+                </h3>
+                <div class="form-group col-md-10 col-md-offset-1">
+                    <textarea id="bibtex" class="form-control" readonly>
+@article{wang2023digging,
+    title={Digging into Depth Priors for Outdoor Neural Radiance Fields},
+    author={Chen Wang and Jiadai Sun and Lina Liu and Chenming Wu 
+            and Zhelun Shen and Dayan Wu and Yuchao Dai and Liangjun Zhang},
+    journal={Proceedings of the 31th ACM International Conference on Multimedia},
+    year={2023}
+}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Acknowledgement
+                </h3>
+                <p class="text-justify">
+                    The website template was borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a> and <a
+                        href="https://bmild.github.io/">Ben Mildenhall</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
