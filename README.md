@@ -1,5 +1,5 @@
 # Digging into Depth Priors for Outdoor Neural Radiance Fields
-This is the official implementation of our ACM MM 2023 paper Digging into Depth Priors for Outdoor Neural Radiance Fields. Pull requests and issues are welcome.
+Official implementation of our ACM MM 2023 paper "Digging into Depth Priors for Outdoor Neural Radiance Fields". Pull requests and issues are welcome.
 
 ### [Project Page](https://cwchenwang.github.io/outdoor-nerf-depth/) | [Paper](https://arxiv.org/abs/2308.04413) | [Dataset](https://drive.google.com/drive/folders/1pTlWLGsLxCjw8DlFaL71yyWFBe4W7X5W?usp=drive_link)
 
